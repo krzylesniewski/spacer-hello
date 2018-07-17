@@ -1,10 +1,11 @@
+/* eslint-disable */
 <template>
   <div class="wrapper">
       <div class="search">
         <label for="search">Search</label>
-          <input 
-            type="text" 
-            name="search" 
+          <input
+            type="text"
+            name="search"
             v-model="searchValue"
             @input="handleInput"
             />
@@ -20,26 +21,27 @@
 <script>
 import axios from 'axios';
 import debounce from 'lodash.debounce';
+
 const API = 'https://images-api.nasa.gov/search';
 
 export default {
   name: 'Home',
-  data(){
+  data() {
     return {
       searchValue: '',
       results: [],
     };
   },
-  methods:{
-    handleInput: debounce(function(){
+  methods: {
+    handleInput: debounce(function () {
       axios.get(`${API}?q=${this.searchValue}&media_type=image`)
-        .then((response)=>{
+        .then((response) => {
           this.results = response.data.collection.items;
         })
-        .catch((error)=>{
+        .catch((error) => {
           console.log(error);
         });
-    },500),
+    }, 500),
   },
 };
 </script>
@@ -58,12 +60,11 @@ export default {
       width: 250px;
     }
     label{
-      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular';
     }
     input{
       height: 30px;
       border: 0;
       border-bottom: 1px solid black;
     }
-
 </style>
