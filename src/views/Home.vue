@@ -1,31 +1,24 @@
-/* eslint-disable */
 <template>
   <div class="wrapper">
-      <div class="search">
-        <label for="search">Search</label>
-          <input
-            type="text"
-            name="search"
-            v-model="searchValue"
-            @input="handleInput"
-            />
-      </div>
-      <ul>
-        <li v-for="item in results" :key="item.data[0].nasa_id">
-          <p>{{ item.data[0].description }}</p>
-        </li>
-      </ul>
+      <Claim />
+      <Searchimput />
   </div>
 </template>
 
 <script>
 import axios from 'axios';
 import debounce from 'lodash.debounce';
+import Claim from '@/components/Claim.vue';
+import Searchimput from '@/components/Searchimput.vue';
 
 const API = 'https://images-api.nasa.gov/search';
 
 export default {
   name: 'Home',
+  components: {
+    Claim,
+    Searchimput,
+  },
   data() {
     return {
       searchValue: '',
@@ -47,24 +40,18 @@ export default {
 </script>
 <style lang="scss" scoped>
     .wrapper {
+        box-sizing: border-box;
+        margin: 0 auto;
+        height: 100vh;
+        width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin: 0;
+        justify-content: center;
         padding: 30px;
-        width: 100%;
-    }
-    .search{
-      display: flex;
-      flex-direction: column;
-      width: 250px;
-    }
-    label{
-      font-family: 'Lucida Sans', 'Lucida Sans Regular';
-    }
-    input{
-      height: 30px;
-      border: 0;
-      border-bottom: 1px solid black;
+        background-image: url('../assets/discovery-launch-liftoff-23764.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: 30% 0%;
     }
 </style>

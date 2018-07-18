@@ -1,14 +1,11 @@
 <template>
-  <div clss="app">
-    <div class="nav">
-      <router-link to="/" >SPACER</router-link>
-    </div>
+  <div class="app">
     <router-view />
   </div>
 </template>
 
-<style lang="scss" scoped>
-  * {
+<style lang="scss" >
+  body {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
