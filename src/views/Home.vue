@@ -1,7 +1,8 @@
 <template>
   <div class="wrapper">
+      <HeroImage />
       <Claim />
-      <Searchimput />
+      <Searchimput v-model="searchValue" @input="handleInput"/>
   </div>
 </template>
 
@@ -10,6 +11,7 @@ import axios from 'axios';
 import debounce from 'lodash.debounce';
 import Claim from '@/components/Claim.vue';
 import Searchimput from '@/components/Searchimput.vue';
+import HeroImage from '@/components/HeroImage.vue';
 
 const API = 'https://images-api.nasa.gov/search';
 
@@ -18,15 +20,19 @@ export default {
   components: {
     Claim,
     Searchimput,
+    HeroImage,
   },
   data() {
     return {
+      loading: false,
+      step: 0,
       searchValue: '',
       results: [],
     };
   },
   methods: {
     handleInput: debounce(function () {
+      console.log(this.searchValue);
       axios.get(`${API}?q=${this.searchValue}&media_type=image`)
         .then((response) => {
           this.results = response.data.collection.items;
@@ -49,9 +55,5 @@ export default {
         align-items: center;
         justify-content: center;
         padding: 30px;
-        background-image: url('../assets/discovery-launch-liftoff-23764.jpg');
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: 30% 0%;
     }
 </style>

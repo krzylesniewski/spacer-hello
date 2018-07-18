@@ -3,25 +3,36 @@
     <input
       type="text"
       name="search"
-      v-model="searchValue"
-      @input="handleInput"
+      :value="value"
+      @input="handleChange"
     />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Searchimput.vue',
+  name: 'Searchimput',
+  props: {
+    value: {
+      type: String,
+      required: true,
+    },
+  },
+  methods: {
+    handleChange(e) {
+      this.$emit('input', e.target.value);
+    },
+  },
 };
 </script>
 
 <style>
-    .searchWrapper{
+    .searchWrapper {
       display: flex;
       flex-direction: column;
       width: 250px;
     }
-    input{
+    input {
       height: 30px;
       border: 0;
       border-bottom: 1px solid #aaa;
@@ -29,5 +40,11 @@ export default {
       background: none;
       color: #fff;
       text-align: center;
+      font-size: 20px;
+      transition: box-shadow .5s;
+    }
+    input:focus {
+      outline: none;
+      box-shadow: 0 5px 10px -8px #aaa;
     }
 </style>

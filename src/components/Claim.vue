@@ -27,11 +27,19 @@ export default {
         font-size: 50px;
         text-transform: uppercase;
         margin: 0;
+        @media (min-width: 768px){
+            font-size: 80px;
+        }
     }
     .subClaim{
-        font-size: 13px;
+        font-size: 15px;
         margin: 20px 0 0 0;
         text-align: center;
+        width: 80%;
+        @media (min-width: 768px){
+            font-size: 20px;
+            width: 60%;
+        }
     }
 </style>
 
