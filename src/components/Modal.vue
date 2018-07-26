@@ -2,16 +2,11 @@
   <div class="outerWrapper">
     <div class="innerWrapper">
       <div class="photo">
-          <img src="https://images.pexels.com/photos/264635/pexels-photo-264635.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="" srcset="">
+          <img :src="photo" alt="">
       </div>
       <div class="description">
-        <h2 class="title">Lorem ipsum</h2>
-        <p class="description">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
-            Suscipit, in laudantium quae, temporibus deserunt obcaecati labore
-             minima optio est assumenda error asperiores necessitatibus odit, alias
-             vel pariatur ex rerum tenetur.
-        </p>
+        <h2 class="title">{{ title }}</h2>
+        <p class="description">{{ description }}</p>
       </div>
     </div>
     <div class="close" @click="$emit('closeModal')"></div>
@@ -21,11 +16,30 @@
 <script>
 export default {
   name: 'Modal',
+  props: {
+    item: {
+      type: Object,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      photo: null,
+      title: null,
+      description: null,
+    };
+  },
+  mounted() {
+    this.photo = this.item.links[0].href;
+    this.title = this.item.data[0].title;
+    this.description = this.item.data[0].description.substring(0,400);
+  },
 };
 </script>
 
 <style lang="scss" scoped>
   .outerWrapper {
+    box-sizing: border-box;
      max-width: 100%;
      height: 100%;
      position: fixed;
@@ -45,6 +59,7 @@ export default {
      }
   }
   .innerWrapper {
+    box-sizing: border-box;
     display: flex;
     height: 100%;
     padding: 50px;
@@ -74,7 +89,7 @@ export default {
       padding: 30px;
       right: 0;
       top: 0;
-      cursor: pointer; 
+      cursor: pointer;
 
       &::before,
       &::after {
